@@ -1,4 +1,4 @@
 class BreastFeedLogEntry < ActiveRecord::Base
-  # attr_accessible :title, :body
-  belongs_to :log_entry, :as => :loggable
+  attr_accessible :breast, :duration
+  has_one :log_entry, :as => :loggable
 end
