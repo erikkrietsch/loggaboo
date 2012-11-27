@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120041258) do
+ActiveRecord::Schema.define(:version => 20121122014110) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -154,6 +154,10 @@ ActiveRecord::Schema.define(:version => 20121120041258) do
     t.datetime "last_login"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "first_name"
+    t.string   "last_name"
   end
+
+  add_index "users", ["open_id_token"], :name => "index_users_on_open_id_token", :unique => true
 
 end

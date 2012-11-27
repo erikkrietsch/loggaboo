@@ -11,3 +11,23 @@
  *= require_self
  *= require_tree .
  */
+$green: #99CC99;
+
+body {
+  font: {
+    family: helvetica;
+    weight: normal;
+    size: 10pt;
+  }
+}
+
+.footer {
+  background-color: $green;
+  border-width: 1px;
+  border-color: darken($green, 70%);
+  font: {
+    family: sans-serif;
+    weight: regular;
+    size: 0.8em;
+  }
+}

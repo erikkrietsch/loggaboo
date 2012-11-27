@@ -10,5 +10,12 @@
 
 <%= yield %>
 
+<br/><br/>
+<div class="footer">
+  You are <%= signed_in? ? "definitely" : "totally not " %> signed in.<br/>
+  <br/>
+  Session deets: <%= session.inspect %><br/>
+  User deets: <%= User.find(session[:user_id]).inspect %>
+</div>
 </body>
 </html>
