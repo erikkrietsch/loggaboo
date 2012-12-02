@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122014110) do
+ActiveRecord::Schema.define(:version => 20121128175218) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -19,7 +19,10 @@ ActiveRecord::Schema.define(:version => 20121122014110) do
     t.string   "photo_url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "owner_id",   :null => false
   end
+
+  add_index "babies", ["owner_id"], :name => "index_babies_on_owner_id"
 
   create_table "babies_logs", :id => false, :force => true do |t|
     t.integer "baby_id"
@@ -98,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20121122014110) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "open_id_token"
+    t.string   "auth_token"
     t.string   "email"
     t.string   "display_name"
     t.datetime "last_login"
@@ -106,8 +109,11 @@ ActiveRecord::Schema.define(:version => 20121122014110) do
     t.datetime "updated_at",    :null => false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "auth_provider"
   end
 
-  add_index "users", ["open_id_token"], :name => "index_users_on_open_id_token", :unique => true
+  add_index "users", ["auth_token", "auth_provider"], :name => "index_users_on_auth_token_and_auth_provider"
+  add_index "users", ["auth_token"], :name => "index_users_on_open_id_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

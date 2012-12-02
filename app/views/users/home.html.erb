@@ -1,0 +1,25 @@
+<h2>Welcome back, <%= @user.first_name %>!</h2>
+
+<h3>Babies</h3> 
+<%= link_to "New baby", {:controller => :baby, :action => :new}, :class => "action new" %>
+
+<table summary="list of available babies">
+  <tr class="header">
+    <th>Name</th>
+    <th>Birthday</th>
+    <th>Log</th>
+  </tr>
+<% @user.babies.each do |b| %>
+  <tr class="<%= cycle("odd", "even")%>">
+    <td><%= link_to b.name, :controller => :babies, :action => :show, :id => b.id %></td>
+    <td><%= b.birthday.to_s(:long) %>
+    <td>
+      <% log_index = 1 %>
+      <% b.logs.each do |l| %>
+        <%= link_to "Log #{log_index}", :controller => :logs, :action => :show, :id => l.id %> 
+        <% log_index += 1 %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>

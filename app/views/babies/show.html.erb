@@ -1,0 +1,42 @@
+<h2><%= @baby.name %></h2>
+
+<table summary="baby details">
+  <tr>
+    <th>Name</th>
+    <td><%= @baby.name %></td>
+  </tr>
+  <tr>
+    <th>Birthday</th>
+    <td><%= @baby.birthday.to_s(:long) %></td>
+  </tr>
+  <tr>
+    <th>Photo</th>
+    <td><%= @baby.photo_url ? image_tag(@baby.photo_url) : "n/a" %>
+  </tr>
+</table>
+
+<h3>Logs</h3>
+<table summary="log list">
+  <tr>
+    <th>Link</th>
+    <th>Owner</th>
+  </tr>
+  <% log_index = 1 %>
+  <% @baby.logs.each do |l| %>
+  <tr class="<%= cycle("odd", "even") %>">
+    <td><%= link_to "Log #{log_index}", {:controller => :logs, :action => :show, :id => l.id}, :class => "action show" %></td>
+    <td><%= l.creator.full_name %> <%= l.creator.email %></td>
+  </tr>
+  <% end %>
+</table>
+
+<h3>Users with access</h3>
+<table summary="users with access">
+  <% @baby.users.each do |u| %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td><%= u.first_name %></td>
+      <td><%= u.last_name %></td>
+      <td><%= u.email %></td>
+    </tr>
+  <% end %>
+</table>

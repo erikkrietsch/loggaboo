@@ -1,0 +1,27 @@
+<h3>Log</h3>
+
+<%= link_to "New log entry", :controller => :log_entries, :action => :new_menu, :log_id => @log.id %>
+
+<div data-role="header">
+  <h1>Listing Log</h1>
+</div>
+
+  <tr class="header">
+    <th>Type</th>
+    <th>When</th>
+    <th>Who</th>
+    <th>Details</th>
+    <th>Notes</th>
+  </tr>
+<% @log.log_entries.order("log_entries.when DESC").each do |le| %>
+  <tr class="<%= cycle("odd", "even") %>">
+    <td class="entry-icon"><%= entry_icon(le.type) %></td>
+    <td><%= entry_recorded_date(le.when) %></td>
+    <td><%= le.creator.first_name %></td>
+    <td><%= entry_details(le) %></td>
+    <td><%= truncate(le.notes, :length => 40, :omission => "...") %></td>
+  </tr>
+<% end %>
+</table>
+  
+  

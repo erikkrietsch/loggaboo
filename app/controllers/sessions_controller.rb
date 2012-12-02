@@ -1,49 +1,26 @@
 class SessionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-  
-  def show
-    render :text => session_url
-  end
-  
-  def new
-    response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
-        :identifier => "https://www.google.com/accounts/o8/id",
-        :required => ["http://axschema.org/contact/email",
-                      "http://axschema.org/namePerson/first",
-                      "http://axschema.org/namePerson/last"],
-        :return_to => session_url,
-        :method => 'POST')
-    head 401
-  end
-  
+
   def create
-    if openid = request.env[Rack::OpenID::RESPONSE]
-      case openid.status
-      when :success
-        ax = OpenID::AX::FetchResponse.from_success_response(openid)
-        user = User.where(:open_id_token => openid.display_identifier).first
-        user ||= User.create!(:open_id_token => openid.display_identifier,
-                              :email => ax.get_single('http://axschema.org/contact/email'),
-                              :first_name => ax.get_single('http://axschema.org/namePerson/first'),
-                              :last_name => ax.get_single('http://axschema.org/namePerson/last'))
-        user.last_login = DateTime.now
-        session[:user_id] = user.id
-        if user.first_name.blank?
-          redirect_to(user_additional_info_path(user))
-        else
-          redirect_to(session[:redirect_to] || root_path)
-        end
-      when :failure
-        render :action => 'problem'
-      end
-    else
-      redirect_to new_session_path
+    auth = request.env["omniauth.auth"]
+    user = User.find_by_provider_and_uid(auth[:provider], auth[:uid])
+    if user == nil
+      puts "\n***Creating user from auth hash"
+      user = User.create_with_omniauth(auth)
     end
+    session[:user_id] = user.id
+    session[:uid] = auth[:uid]
+    flash[:notice] = "Signed in!"
+    redirect_to :controller => :users, :action => :home
   end
-  
+
   def destroy
-    #session.destroy
     session[:user_id] = nil
-    redirect_to root_path, {:params => @current_user}
+    session[:uid] = nil
+    flash[:notice] = "Signed out!"
+    redirect_to root_url
+  end
+    
+  def oauth_failure
+    render :text => "Oops."
   end
 end

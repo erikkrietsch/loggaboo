@@ -1,16 +1,7 @@
 module AuthenticationHelper
-  def signed_in?
-    !session[:user_id].nil?
-  end
-  
-  def current_user
-    @current_user ||= User.find(session[:user_id])
-  end
-  
-  def ensure_signed_in
-    unless signed_in?
-      session[:redirect_to] = request.fullpath
-      redirect_to(new_session_path)
-    end
+  def logged_in?
+    #return !session[:uid].blank?
+    return true
+    #return User.where(:auth_token => session[:uid], :id => session[:id]).first != nil
   end
 end

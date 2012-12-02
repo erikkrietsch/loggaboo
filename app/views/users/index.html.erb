@@ -1,4 +1,16 @@
+<h2>Users#index</h2>
 
-<h2>You made it!</h2>
+<% unless flash[:notice].blank? %>
+<div class="notice">
+  <%= flash[:notice] %>
+</div>
+<% end %>
 
-<%= link_to 'Logout', session_path, :action => 'destroy', :method => 'delete' %>
+<%= link_to "Login with Google", "/auth/google_oauth2/" %><br/>
+<%= link_to "Logout", "/sessions/destroy/" %><br/>
+
+<% unless session[:user_id].blank? %>
+<div class="user_id">
+  User ID: <%= session[:user_id] %>
+</div>
+<% end %>
