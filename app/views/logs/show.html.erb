@@ -1,27 +1,20 @@
-<h3>Log</h3>
-
-<%= link_to "New log entry", :controller => :log_entries, :action => :new_menu, :log_id => @log.id %>
-
 <div data-role="header">
-  <h1>Listing Log</h1>
+  <%= link_to 'Add', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, "data-icon" => "plus", "class" => "ui-btn-right" %>
+  <h1>Log</h1>
 </div>
 
-  <tr class="header">
-    <th>Type</th>
-    <th>When</th>
-    <th>Who</th>
-    <th>Details</th>
-    <th>Notes</th>
-  </tr>
-<% @log.log_entries.order("log_entries.when DESC").each do |le| %>
-  <tr class="<%= cycle("odd", "even") %>">
-    <td class="entry-icon"><%= entry_icon(le.type) %></td>
-    <td><%= entry_recorded_date(le.when) %></td>
-    <td><%= le.creator.first_name %></td>
-    <td><%= entry_details(le) %></td>
-    <td><%= truncate(le.notes, :length => 40, :omission => "...") %></td>
-  </tr>
-<% end %>
-</table>
+<div data-role="content">
+  <ul data-role="listview">
+    <% @log.log_entries.order("log_entries.when DESC").each do |le| %>
+    <li>
+      <div class="entry-icon"><%= entry_icon(le.type) %></div>
+      <div class="entry-recorded-date"><%= entry_recorded_date(le.when) %></div>
+      <div class="entry-details"><%= entry_details(le) %></div>
+<!-- #link_to 'edit post', edit_post_path(post), "data-icon" => "gear"  -->
+    </li>
+    <% end %>
+  </ul>
+</div>
+
   
   

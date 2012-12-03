@@ -1,11 +1,27 @@
 class LogEntriesController < ApplicationController
   
   def new
-    @log_entry = LogEntry.new
-    @log_entry.creator = User.find_by_auth_token(session[:uid])
-    @log_entry.log = Log.find_by_id(params[:log_id])
-    @log_entry.when = DateTime.now
+    @log_entry = LogEntry.new(:log_id => params[:log_id], :creator_id => session[:user_id], :loggable_type => params[:type])
+    case params[:type]
+    when "breastfeed"
+      @loggable = BreastFeedLogEntry.new    
+    when "bottlefeed"
+      @loggable = BottleFeedLogEntry.new
+    when "diaper"
+      @loggable = DiaperLogEntry.new
+    when "medicine"
+      @loggable = MedicineLogEntry.new
+    when "sleep"
+      @loggable = SleepLogEntry.new
+    else
+      @loggable = OtherLogEntry.new
+    end 
     
+  end
+  
+  def new_menu
+    @log = Log.find_by_id(params[:log_id])
+    @types = ["breastfeed", "sleep", "diaper", "medicine"]
   end
   
   def create

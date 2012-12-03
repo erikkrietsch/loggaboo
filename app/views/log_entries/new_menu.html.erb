@@ -1,0 +1,11 @@
+<div data-role="header">
+  <h1>New Entry</h1>
+</div>
+
+<div data-role="content">
+  <div data-role="grid" class="ui-grid-a">
+    <% @types.each do |t| %>
+    <div class="<%= cycle("ui-block-a", "ui-block-b") %>"><%= link_to( image_tag("/entry_icons/menu_#{t}.png"), {:action => :new, :log_id => @log.id, :type => t}, :class => "menu-new-entry") %></div>
+    <% end %>
+  </div>
+</div>

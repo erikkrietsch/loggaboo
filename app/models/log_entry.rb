@@ -1,5 +1,5 @@
 class LogEntry < ActiveRecord::Base
-  attr_accessible :notes, :when, :creator_id, :log_id
+  attr_accessible :notes, :when, :creator_id, :log_id, :loggable_type, :loggable_id
   belongs_to :log
   belongs_to :loggable, :polymorphic => true
   belongs_to :creator, :class_name => "User", :foreign_key => :creator_id
