@@ -1,0 +1,11 @@
+<tr>
+  <th>Type</th>
+  <td>
+    <%= radio_button :bottle_feed_log_entry, :kind, "Milk" %> Milk <br/>
+    <%= radio_button :bottle_feed_log_entry, :kind, "Formula" %> Formula <br/>
+  </td>
+</tr>
+<tr>
+  <th>Amount</th>
+  <td><%= text_field :bottle_feed_log_entry, :amount, :class => "slider"%> ML </td>
+</tr>

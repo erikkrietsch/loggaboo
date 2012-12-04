@@ -1,0 +1,11 @@
+<tr>
+  <th>Breast</th>
+  <td>
+    <%= radio_button :breast_feed_log_entry, :breast, "Left" %> Left <br/>
+    <%= radio_button :breast_feed_log_entry, :breast, "Right" %> Right <br/>
+  </td>
+</tr>
+<tr>
+  <th>Duration</th>
+  <td><%= text_field :breast_feed_log_entry, :duration, :class => "slider"%></td>
+</tr>
