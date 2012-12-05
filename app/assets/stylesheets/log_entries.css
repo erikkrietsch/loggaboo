@@ -1,0 +1,33 @@
+/*line 6, ../../app/assets/stylesheets/log_entries.css.scss*/
+/*+clearfix {*/
+LI:after
+{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	font-size: 0;
+}
+LI
+{
+	display: inline-block;
+}
+LI
+{
+/*\*/
+	display: block;
+/**/
+	-height: 1px;
+}
+/*+}*/
+IMG.entry-icon
+{
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+/*[clearfix]*/LI
+{
+	padding: 4px;
+}

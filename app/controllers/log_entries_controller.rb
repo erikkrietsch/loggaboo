@@ -32,15 +32,15 @@ class LogEntriesController < ApplicationController
     when "breastfeed"
       @loggable = BreastFeedLogEntry.create(params[:breast_feed_log_entry])    
     when "bottlefeed"
-      @loggable = BottleFeedLogEntry.new
+      @loggable = BottleFeedLogEntry.create(params[:bottle_feed_log_entry])
     when "diaper"
-      @loggable = DiaperLogEntry.new
+      @loggable = DiaperLogEntry.create(params[:diaper_log_entry])
     when "medicine"
-      @loggable = MedicineLogEntry.new
+      @loggable = MedicineLogEntry.create(params[:medicine_log_entry])
     when "sleep"
-      @loggable = SleepLogEntry.new
+      @loggable = SleepLogEntry.create(params[:sleep_log_entry])
     else
-      @loggable = OtherLogEntry.new
+      @loggable = OtherLogEntry.create(params[:other_log_entry])
     end
     @log_entry.loggable = @loggable
     @log_entry.save

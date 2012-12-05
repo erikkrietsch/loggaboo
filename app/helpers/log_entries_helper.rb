@@ -28,7 +28,7 @@ module LogEntriesHelper
   end
   
   def entry_icon(entry_type)
-    return image_tag("/entry_icons/#{entry_type}.png", :size => "50x50", :title => entry_type, :class => "entry-icon", :style => "float:left;")
+    return image_tag("/entry_icons/#{entry_type}.png", :title => entry_type, :class => "entry-icon")
   end
   
   def entry_list_item(log_entry)
