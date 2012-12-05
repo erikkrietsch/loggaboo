@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :auth_token, :auth_provider, :first_name, :last_name, :email
+  attr_accessible :auth_token, :auth_provider, :first_name, :last_name, :email, :display_name
   has_and_belongs_to_many :babies
   has_many :log_entries, :as => :loggable
   has_many :logs_created, :class_name => "Log"
