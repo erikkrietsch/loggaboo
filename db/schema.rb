@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203023543) do
+ActiveRecord::Schema.define(:version => 20121205140538) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -20,16 +20,11 @@ ActiveRecord::Schema.define(:version => 20121203023543) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "owner_id",   :null => false
+    t.integer  "log_id"
   end
 
+  add_index "babies", ["log_id"], :name => "index_babies_on_log_id"
   add_index "babies", ["owner_id"], :name => "index_babies_on_owner_id"
-
-  create_table "babies_logs", :id => false, :force => true do |t|
-    t.integer "baby_id"
-    t.integer "log_id"
-  end
-
-  add_index "babies_logs", ["baby_id", "log_id"], :name => "index_babies_logs_on_baby_id_and_log_id"
 
   create_table "babies_users", :id => false, :force => true do |t|
     t.integer "user_id"

@@ -21,7 +21,7 @@ class LogEntriesController < ApplicationController
   
   def new_menu
     @log = Log.find_by_id(params[:log_id])
-    @types = ["breastfeed", "sleep", "diaper", "medicine"]
+    @types = %w[breastfeed bottlefeed sleep diaper medicine other]
   end
   
   def create

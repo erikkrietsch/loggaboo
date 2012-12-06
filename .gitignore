@@ -19,3 +19,4 @@ config/database.yml
 
 # Ignore the htaccess file
 public/.htaccess
+config/initializers/omniauth.rb

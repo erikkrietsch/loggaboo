@@ -12,4 +12,7 @@ class UsersController < ApplicationController
     
   end
   
+  def revoke
+  end
+  
 end

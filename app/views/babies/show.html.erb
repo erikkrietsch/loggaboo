@@ -1,5 +1,7 @@
 <h2><%= @baby.name %></h2>
 
+<%= link_to "Delete", :action => :destroy, :id => @baby.id %>
+
 <table summary="baby details">
   <tr>
     <th>Name</th>
@@ -21,13 +23,10 @@
     <th>Link</th>
     <th>Owner</th>
   </tr>
-  <% log_index = 1 %>
-  <% @baby.logs.each do |l| %>
-  <tr class="<%= cycle("odd", "even") %>">
-    <td><%= link_to "Log #{log_index}", {:controller => :logs, :action => :show, :id => l.id}, :class => "action show" %></td>
-    <td><%= l.creator.full_name %> <%= l.creator.email %></td>
+  <tr >
+    <td><%= link_to "Log", {:controller => :logs, :action => :show, :id => @baby.log.id}, :class => "action show" %></td>
+    <td><%= @baby.log.creator.display_name %> <%= @baby.log.creator.email %></td>
   </tr>
-  <% end %>
 </table>
 
 <h3>Users with access</h3>
@@ -37,6 +36,7 @@
       <td><%= u.first_name %></td>
       <td><%= u.last_name %></td>
       <td><%= u.email %></td>
+      <td><%= link_to_if(@baby.owner == @user, "revoke", {:controller => :users, :action => :revoke, :id => u.id, :baby_id => @baby.id}, {:confirm => "Are you sure?"}) %>
     </tr>
   <% end %>
 </table>

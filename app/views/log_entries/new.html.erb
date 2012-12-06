@@ -15,7 +15,7 @@
     <td><%= f.text_field :when %></td>
   </tr>
 
-<%= render(:partial => "#{@log_entry.loggable_type}_form", :locals => {:f => f}) %>
+<%= render(:partial => "#{@log_entry.loggable_type}_form", :locals => {:f => f}) unless @log_entry.loggable_type == "other" %>
   
   <tr>
     <th>Notes</th>
