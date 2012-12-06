@@ -11,4 +11,5 @@ class DropMultipleLogsPerBaby < ActiveRecord::Migration
       t.references :baby
     end
     add_index :babies_users, ["user_id", "baby_id"]
+  end
 end
