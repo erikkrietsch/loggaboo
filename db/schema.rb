@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205140538) do
+ActiveRecord::Schema.define(:version => 20121206212421) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -94,6 +94,19 @@ ActiveRecord::Schema.define(:version => 20121205140538) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
+
+  create_table "user_permission_requests", :force => true do |t|
+    t.integer  "requested_by_id",                :null => false
+    t.integer  "requested_of_id",                :null => false
+    t.integer  "status",          :default => 0, :null => false
+    t.datetime "status_changed",                 :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "token",                          :null => false
+  end
+
+  add_index "user_permission_requests", ["requested_by_id", "requested_of_id"], :name => "index_on_upr_requestor_id_and_requestee_id"
+  add_index "user_permission_requests", ["token"], :name => "index_user_permission_requests_on_token"
 
   create_table "users", :force => true do |t|
     t.string   "auth_token"

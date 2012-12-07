@@ -1,0 +1,28 @@
+<%= link_to "<< Go back", :controller => :users, :action => :home %>
+
+<% if @user_received.count > 0 %>
+<div data-role="header">
+  <h3>Your pending requests</h3>
+</div>
+<div data-role="list">
+  <ul>
+  <% @user_received.each do |r| %>
+    <li><%= link_to "view", :action => :show, :token => r.token %> <%= r.requested_by.display_name %>, <%= r.requested_by.email %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<% if @user_requested.count > 0 %>
+<div data-role="header">
+  <h3>Pending requests you've made to other users</h3>
+</div>
+<div data-role="list">
+  <ul>
+  <% @user_requested.each do |r| %>
+    <li><%= r.token %><%= r.requested_of.display_name %>, <%= r.requested_of.email %> status: <%= r.status %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

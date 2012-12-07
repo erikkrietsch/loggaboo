@@ -1,4 +1,13 @@
-<h2>Welcome back, <%= @user.first_name %>!</h2>
+<div>
+  <h2>Welcome back, <%= @user.first_name %>!</h2>
+  <div class="logout-link">Not <%= @user.first_name %>? <%= link_to "sign out", {:controller => :sessions, :action => :destroy}, :class => "logout-link" %></div><br/>
+  <div class="create-request"><%= link_to "Request user permission", {:controller => :user_permission_requests, :action => :new}, :class => "create-request" %></div>
+</div>
+
+<% if @user.has_requests? %>
+<h3>Requests</h3>
+You have pending requests! <%= link_to "Check 'em out!", {:controller => :user_permission_requests, :action => :list}, :class => "pending-requests" %>
+<% end %>
 
 <h3>Babies</h3> 
 <%= link_to "New baby", {:controller => :babies, :action => :new}, :class => "action new" %>

@@ -9,7 +9,7 @@
 <%= link_to "Login with Google", "/auth/google_oauth2/" %><br/>
 <%= link_to "Logout", "/sessions/destroy/" %><br/>
 
-<% unless session[:user_id].blank? %>
+<% if not session[:user_id].blank? %>
 <div class="user_id">
   User ID: <%= session[:user_id] %>
 </div>

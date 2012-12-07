@@ -1,0 +1,15 @@
+<% if not flash[:notice].blank? %>
+<div>
+  <%= flash[:notice]%>
+</div>
+<%end %>
+
+<h3>Request permission to use logs</h3>
+<%= link_to "<< Go back", :controller => :users, :action => :home %><br/><br/>
+<%= form_tag :action => :create do %>
+
+  Enter a user's email to send them a request to use their logs:<br/>
+  <%= text_field_tag :email %><br/>
+  <%= submit_tag "Send Request" %>
+
+<% end %>
