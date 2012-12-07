@@ -23,4 +23,5 @@ public/.htaccess
 # These differ depending on the machine they're on
 # be sure to pull gemfile contents as necessary
 config/initializers/omniauth.rb
-Gemfile*
+Gemfile
+Gemfile.lock

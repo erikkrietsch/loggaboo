@@ -56,7 +56,7 @@ Poopsy::Application.routes.draw do
   match "/baby" => "babies#show"
   match "/home" => "users#home"
   match "/log" => "logs#show"
-  #match "/req/:token" => "user_permission_requests#show?token=:token"
+  match "/req/:token" => "user_permission_requests#show?token=:token"
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

@@ -7,6 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <% if not flash[:notice].blank? %>
+    <div class="flash-notice"><%= flash[:notice] %></div>
+    <% end %>
     <div data-role="page">
 
   <%= yield %>

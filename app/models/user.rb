@@ -12,6 +12,13 @@ class User < ActiveRecord::Base
     return UserPermissionRequest.where(:requested_of_id => self.id, :status => UserPermissionRequest::STATUS_PENDING).count > 0
   end
   
+  def approve_user_permission_request(requesting_user_id)
+    requesting_user = User.find_by_id(requesting_user_id)
+    self.babies.each do |b|
+      b.users << requesting_user unless b.owner == requesting_user || b.users.include?(requesting_user)
+    end
+  end
+  
   def User.find_by_provider_and_uid(provider, uid)
     User.where(:auth_token => uid, :auth_provider => provider).first
   end

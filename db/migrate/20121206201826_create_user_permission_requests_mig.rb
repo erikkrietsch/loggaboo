@@ -1,4 +1,4 @@
-class CreateUserPermissionRequests < ActiveRecord::Migration
+class CreateUserPermissionRequestsMig < ActiveRecord::Migration
   def change
     create_table :user_permission_requests do |t|
       t.references :requested_by, :class => "User", :null => false

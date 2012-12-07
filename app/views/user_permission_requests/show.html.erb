@@ -1,0 +1,9 @@
+<div data-role="header">
+  <h3>User Permission Request</h3>
+</div>
+<div data-role="content">
+  <%= @upr.requested_by.full_name %> (<%= @upr.requested_by.email %>) requested access to your babies on <%= @upr.created_at.to_s(:long) %><br/><br/>
+  Is that okay? (you can revoke it later)<br/><br/>
+  <%= link_to "Yep!", :action => :approve, :token => params[:token] %>
+  <%= link_to "No way!", :action => :decline, :token => params[:token] %>
+</div>

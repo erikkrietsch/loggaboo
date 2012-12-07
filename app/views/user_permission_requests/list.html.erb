@@ -7,7 +7,7 @@
 <div data-role="list">
   <ul>
   <% @user_received.each do |r| %>
-    <li><%= link_to "view", :action => :show, :token => r.token %> <%= r.requested_by.display_name %>, <%= r.requested_by.email %></li>
+    <li><%= link_to "view", :action => :show, :token => r.token %> <%= r.requested_by.display_name %>, <%= r.requested_by.email %> (status <%= r.status %>)</li>
   <% end %>
   </ul>
 </div>
@@ -16,7 +16,7 @@
 
 <% if @user_requested.count > 0 %>
 <div data-role="header">
-  <h3>Pending requests you've made to other users</h3>
+  <h3>Requests you've made to other users</h3>
 </div>
 <div data-role="list">
   <ul>

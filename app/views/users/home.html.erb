@@ -8,6 +8,8 @@
 <h3>Requests</h3>
 You have pending requests! <%= link_to "Check 'em out!", {:controller => :user_permission_requests, :action => :list}, :class => "pending-requests" %>
 <% end %>
+<%= link_to "Permission Requests", {:controller => :user_permission_requests, :action => :list}, :class => "pending-requests" %>
+
 
 <h3>Babies</h3> 
 <%= link_to "New baby", {:controller => :babies, :action => :new}, :class => "action new" %>
