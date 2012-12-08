@@ -1,14 +1,16 @@
 module LogEntriesHelper
+  include ApplicationHelper
   def entry_recorded_date(recorded_datetime)
-    dt_now = DateTime.now
-    recorded_dt = recorded_datetime.to_datetime
-    datediff = (dt_now - recorded_dt)
+    t_now = time_to_user_local(Time.now)
+    d_now = Date.today
+    recorded = time_to_user_local(recorded_datetime.to_time)#.in_time_zone(User.find(session[:user_id]).config.time_zone)
+    datediff = (d_now - recorded_datetime.to_datetime)
     if datediff < 1
-      return distance_of_time_in_words_to_now(recorded_dt, true) + " ago"
+      return distance_of_time_in_words(recorded, t_now, true) + " ago"
     elsif datediff < 7
-      return recorded_dt.strftime("%a %I:%M %P")
+      return recorded_datetime.strftime("%a %I:%M %P")
     else
-      return recorded_dt.strftime("%m/%e/%y %I:%M %P")
+      return recorded_datetime.strftime("%m/%e/%y %I:%M %P")
     end
   end
   
@@ -32,7 +34,7 @@ module LogEntriesHelper
   end
   
   def entry_list_item(log_entry)
-    return "#{entry_icon(log_entry.type)} #{entry_recorded_date(log_entry.when)} #{entry_details(log_entry)}"
+    return "#{entry_icon(log_entry.type)} #{entry_recorded_date(DateTime.to_user_local(log_entry.when))} #{entry_details(log_entry)}"
   end
   
 end

@@ -1,0 +1,9 @@
+<%= form_for @user.config, :url => {:action => :update} do |f| %>
+  <% if not params[:more_zones] %>
+    <%= f.select :time_zone, ActiveSupport::TimeZone.us_zones.map(&:name) %><br/><br/>
+    <%= link_to "Need more 'zones?", :action => :edit, :more_zones => true %><br/><br/>
+  <% else %>
+    <%= f.select :time_zone, ActiveSupport::TimeZone.all.map(&:name) %><br/><br/>
+  <% end %>
+  <%= submit_tag "Save"%><br/>
+<% end %>

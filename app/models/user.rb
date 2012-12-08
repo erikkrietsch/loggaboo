@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :babies
   has_many :log_entries, :as => :loggable
   has_many :logs_created, :class_name => "Log"
+  has_one :config, :class_name => "UserConfig"
   
   def full_name
     return "#{self.first_name} #{self.last_name}"
@@ -16,6 +17,13 @@ class User < ActiveRecord::Base
     requesting_user = User.find_by_id(requesting_user_id)
     self.babies.each do |b|
       b.users << requesting_user unless b.owner == requesting_user || b.users.include?(requesting_user)
+    end
+  end
+  
+  def decline_user_permission_request(requesting_user_id)
+    requesting_user = User.find_by_id(requesting_user_id)
+    self.babies.each do |b|
+      b.users.delete(requesting_user) unless b.owner == requesting_user
     end
   end
   
@@ -37,6 +45,7 @@ class User < ActiveRecord::Base
         user.save
       else
         user = User.create(:auth_provider => auth[:provider], :auth_token => auth[:uid], :email => auth[:info][:email], :first_name => auth[:info][:first_name], :last_name => auth[:info][:last_name], :display_name => auth[:info][:first_name])
+        user.config = UserConfig.create(:user_id => user.id, :time_zone => "Central Time (US & Canada)")
       end
     end
     return user

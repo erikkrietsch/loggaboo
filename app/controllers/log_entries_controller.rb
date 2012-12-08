@@ -1,7 +1,7 @@
 class LogEntriesController < ApplicationController
   
   def new
-    @log_entry = LogEntry.new(:log_id => params[:log_id], :creator_id => session[:user_id], :loggable_type => params[:type], :when => DateTime.now.to_s(:short))
+    @log_entry = LogEntry.new(:log_id => params[:log_id], :creator_id => session[:user_id], :loggable_type => params[:type], :when => Time.now.to_s(:short))
     case params[:type]
     when "breastfeed"
       @loggable = BreastFeedLogEntry.new    
@@ -26,6 +26,7 @@ class LogEntriesController < ApplicationController
   
   def create
     @log_entry = LogEntry.create(params[:log_entry])
+    @log_entry.when = Time.parse(params[:log_entry][:when]).utc
     @log_entry.log = Log.find_by_id(params[:log_id])
     @log_entry.creator = User.find_by_auth_token(session[:uid])
     case params[:type]

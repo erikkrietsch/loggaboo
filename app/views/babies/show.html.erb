@@ -1,3 +1,6 @@
+
+<%= link_to "<< Go back", :controller => :users, :action => :home %>
+
 <h2><%= @baby.name %></h2>
 
 <%= link_to "Delete", :action => :destroy, :id => @baby.id %>
@@ -31,12 +34,16 @@
 
 <h3>Users with access</h3>
 <table summary="users with access">
-  <% @baby.users.each do |u| %>
-    <tr class="<%= cycle("odd", "even") %>">
-      <td><%= u.first_name %></td>
-      <td><%= u.last_name %></td>
-      <td><%= u.email %></td>
-      <td><%= link_to_if(@baby.owner == @user, "revoke", {:controller => :users, :action => :revoke, :id => u.id, :baby_id => @baby.id}, {:confirm => "Are you sure?"}) %>
-    </tr>
+  <% if @baby.users.count == 1%>
+    Just you! :)
+  <% else %>
+    <% @baby.users.each do |u| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td><%= u.first_name %></td>
+        <td><%= u.last_name %></td>
+        <td><%= u.email %></td>
+        <td><%= link_to_if(@baby.owner == @user, "revoke", {:controller => :user_permission_requests, :action => :list}) %>
+      </tr>
+    <% end %>
   <% end %>
 </table>

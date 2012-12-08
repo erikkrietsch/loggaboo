@@ -1,4 +1,4 @@
-OmniAuth.config.full_host = "http://poopsy.totesrad.com"
+OmniAuth.config.full_host = "http://localhost:3000"
 OmniAuth.config.on_failure = SessionsController.action(:oauth_failure)
 
 Rails.application.config.middleware.use OmniAuth::Builder do

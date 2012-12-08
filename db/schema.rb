@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207041949) do
+ActiveRecord::Schema.define(:version => 20121208003243) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(:version => 20121207041949) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
+
+  create_table "user_configs", :force => true do |t|
+    t.integer  "user_id",                                              :null => false
+    t.string   "time_zone",  :default => "Central Time (US & Canada)", :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+  end
+
+  add_index "user_configs", ["user_id"], :name => "index_user_configs_on_user_id", :unique => true
 
   create_table "user_permission_requests", :force => true do |t|
     t.integer  "requested_by_id",                :null => false

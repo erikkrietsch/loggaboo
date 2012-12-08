@@ -1,5 +1,5 @@
 class UserPermissionRequestsController < ApplicationController
-  
+  include UsersHelper
   def new
     @upr = UserPermissionRequest.new
   end
@@ -23,7 +23,8 @@ class UserPermissionRequestsController < ApplicationController
   def list
     @user = User.find_by_id(session[:user_id])
     @user_requested = UserPermissionRequest.where(:requested_by_id => @user.id).order("updated_at DESC")
-    @user_received = UserPermissionRequest.where(:requested_of_id => @user.id, :status => UserPermissionRequest::STATUS_PENDING).order("updated_at ASC")
+    @user_received =  UserPermissionRequest.where(:requested_of_id => @user.id).order("updated_at ASC")
+    @user_received_pending = @user_received.where(:status => UserPermissionRequest::STATUS_PENDING)
   end
   
   def show
@@ -38,12 +39,14 @@ class UserPermissionRequestsController < ApplicationController
   
   def decline
     update_upr_status(UserPermissionRequest::STATUS_DECLINED)
+    upr = upr_by_token
+    upr.requested_of.decline_user_permission_request(upr.requested_by_id)
   end
   
   protected
   
   def upr_by_token
-    return UserPermissionRequest.find_by_token(params[:token])
+    return UserPermissionRequest.where(:requested_of_id => current_user.id, :token => params[:token]).first
   end
   
   def update_upr_status(new_status)

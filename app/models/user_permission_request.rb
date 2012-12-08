@@ -9,6 +9,19 @@ class UserPermissionRequest < ActiveRecord::Base
   belongs_to :requested_by, :class_name => "User", :foreign_key => :requested_by_id
   belongs_to :requested_of, :class_name => "User", :foreign_key => :requested_of_id
 
+  def status_text
+    case self.status
+    when STATUS_PENDING
+      return "pending"
+    when STATUS_APPROVED
+      return "approved"
+    when STATUS_DECLINED
+      return "declined"
+    else
+      return "???"
+    end
+  end
+
   protected
 
   def generate_token
