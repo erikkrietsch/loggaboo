@@ -1,0 +1,17 @@
+<div class="toolbar">
+  <h1>Log</h1>
+  <%= link_to 'Add', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button plus" %>
+</div>
+
+
+<div class="scroll">
+  <ul class="rounded">
+    <% @log.log_entries.order("log_entries.when DESC").each do |le| %>
+    <li>
+      <div class="entry-icon"><%= entry_icon(le.type) %></div>
+      <div class="entry-recorded-date"><%= entry_recorded_date(le.when) %></div>
+      <div class="entry-details"><%= entry_details(le) %></div>
+    </li>
+    <% end %>
+  </ul>
+</div>

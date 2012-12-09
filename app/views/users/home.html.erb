@@ -4,7 +4,7 @@
   <div class="create-request"><%= link_to "Request user permission", {:controller => :user_permission_requests, :action => :new}, :class => "create-request" %></div>
 </div>
 
-<% if @user.has_requests? %>
+<% if @user.has_pending_requests? %>
 <h3>Requests</h3>
 You have pending requests! <%= link_to "Check 'em out!", {:controller => :user_permission_requests, :action => :list}, :class => "pending-requests" %>
 <% end %>

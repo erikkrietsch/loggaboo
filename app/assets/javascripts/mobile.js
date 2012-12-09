@@ -1,0 +1,3 @@
+$.jQTouch({});
+
+$.alert('asdf');

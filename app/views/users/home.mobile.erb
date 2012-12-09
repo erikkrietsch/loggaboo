@@ -1,0 +1,23 @@
+<h1>Babies</h1>
+<ul class="rounded">
+  <% @user.babies.each do |b| %>
+  <li class="arrow">
+    <%= link_to b.name, {:controller => :logs, :action => :show, :id => b.log.id} %>
+  </li>
+  <% end %>
+</ul>
+
+<ul class="rounded">
+  <li class="arrow"><%= link_to "New Baby", :controller => :babies, :action => :new %></li>
+</ul>
+
+<% if @user.has_pending_requests? %>
+<h1>Pending requests</h1>
+<ul class="rounded">
+  <li class="arrow" >
+    <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list}, :rel => "external" %>
+    <small class="counter"><%= @user.pending_request_count %></small>
+  </li>
+</ul>
+<% end %>
+

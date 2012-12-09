@@ -9,8 +9,12 @@ class User < ActiveRecord::Base
     return "#{self.first_name} #{self.last_name}"
   end
   
-  def has_requests?
+  def has_pending_requests?
     return UserPermissionRequest.where(:requested_of_id => self.id, :status => UserPermissionRequest::STATUS_PENDING).count > 0
+  end
+  
+  def pending_request_count
+    return UserPermissionRequest.where(:requested_of_id => self.id, :status => UserPermissionRequest::STATUS_PENDING).count
   end
   
   def approve_user_permission_request(requesting_user_id)

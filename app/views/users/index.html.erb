@@ -6,7 +6,7 @@
 </div>
 <% end %>
 
-<%= link_to "Login with Google", "/auth/google_oauth2/" %><br/>
+<%= link_to "Login with Google", "/auth/google_oauth2/", :rel => "external" %><br/>
 <%= link_to "Logout", "/sessions/destroy/" %><br/>
 
 <% if not session[:user_id].blank? %>

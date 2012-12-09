@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include AuthenticationHelper
 
+  before_filter :prepare_for_mobile
+  
   protected 
   def authenticate
     unless logged_in?
@@ -10,7 +12,21 @@ class ApplicationController < ActionController::Base
   end
   
   def mobile_device?
-    request.user_agent =~ /Mobile|webOS/
+    if session[:mobile_param]
+      session[:mobile_param] == "1"
+    else
+      request.user_agent =~ /Mobile|webOS/
+    end
   end
   helper_method :mobile_device?
+  
+  def prepare_for_mobile
+    session[:mobile_param] = params[:mobile] if params[:mobile]
+    request.format = :mobile if mobile_device?
+  end
+  
+  def show_title?
+    true
+  end
+  helper_method :show_title?
 end
