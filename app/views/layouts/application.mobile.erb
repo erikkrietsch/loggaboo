@@ -9,7 +9,7 @@
     <div class="current scrollable">
       <% if show_title? %>
       <div class="toolbar">
-        <%= link_to "Back", nil, :class => "back button" unless current_page? root_path %>
+        <%= link_to "Back", nil, :class => "back" unless current_page? root_path %>
         <%= link_to "Logout", {:controller => :sessions, :action => :destroy}, :class => "button" %>
         <h1><%=h yield(:title) %></h1>
         <%= yield(:toolbar) %>

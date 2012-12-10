@@ -1,0 +1,41 @@
+<% title "Baby Access Requests "%>
+<% toolbar link_to "Make Request", :action => :new, :class => "button" %>
+<% if @user_received_pending.count > 0 %>
+
+<h1>Your pending requests</h1>
+
+<div class="scroll">
+  <ul class="rounded">
+  <% @user_received_pending.each do |r| %>
+    <li><%= link_to "Approve", :action => :approve, :token => r.token %> | <%= link_to "Decline", :action => :decline, :token => r.token %> <%= r.requested_by.display_name %>, <%= r.requested_by.email %> (status <%= r.status_text %>)</li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<% if @user_received.count > 0 %>
+<div data-role="header">
+  <h3>Your previous requests</h3>
+</div>
+<div data-role="list">
+  <ul>
+  <% @user_received.each do |r| %>
+    <li><%= link_to_if r.status != UserPermissionRequest::STATUS_APPROVED, "Approve", :action => :approve, :token => r.token %> | <%= link_to_if r.status != UserPermissionRequest::STATUS_DECLINED, "Decline", :action => :decline, :token => r.token %> <%= r.requested_by.display_name %>, <%= r.requested_by.email %> (status <%= r.status_text %>) <%= r.token %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<% if @user_requested.count > 0 %>
+<div data-role="header">
+  <h3>Requests you've made to other users</h3>
+</div>
+<div data-role="list">
+  <ul>
+  <% @user_requested.each do |r| %>
+    <li><%= r.requested_of.display_name %>, <%= r.requested_of.email %> status: <%= r.status_text %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

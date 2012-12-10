@@ -15,9 +15,13 @@
 <h1>Pending requests</h1>
 <ul class="rounded">
   <li class="arrow" >
-    <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list}, :rel => "external" %>
+    <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list} %>
     <small class="counter"><%= @user.pending_request_count %></small>
   </li>
 </ul>
 <% end %>
+
+<ul class="rounded">
+  <li class="arrow"><%= link_to "Make Access Request", :controller => :user_permission_requests, :action => :new %></li>
+</ul>
 

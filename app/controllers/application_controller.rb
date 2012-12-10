@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  helper :layout
   include AuthenticationHelper
 
   before_filter :prepare_for_mobile

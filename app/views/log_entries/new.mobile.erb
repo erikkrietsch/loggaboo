@@ -1,0 +1,22 @@
+
+<%= form_for(:log_entry, :url => {:action => :create}) do |f| %>
+
+<ul class="rounded">
+  <li>When
+    <%= f.text_field :when %>
+  </li>
+
+<%= render(:partial => "#{@log_entry.loggable_type}_form", :locals => {:f => f}) unless @log_entry.loggable_type == "other" %>
+  <li>Notes
+    <%= f.text_area :notes, :size => "40x10" %>
+  </li>
+</ul>
+<ul class="individual">
+  <li><%= button_tag "Create entry", :class => "whiteButton" %></li>
+</ul>
+<%= hidden_field_tag :log_id, @log_entry.log.id %>
+<%= hidden_field_tag :creator_id, @log_entry.creator.id %>
+<%= hidden_field_tag :type, params[:type] %>
+
+
+<% end %>

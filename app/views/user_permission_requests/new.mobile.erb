@@ -1,0 +1,16 @@
+<% title "Ask Permission" %>
+<% toolbar "Cancel" %>
+<h1>Send it to who?</h1>
+<div class="scroll">
+  <ul class="rounded">
+  <%= form_tag :action => :create do %>
+    <li><%= text_field_tag :email, nil, "placeholder" => "email" %></li>
+    <li>
+      <%= link_to_function "Send Request", "$(this).closest('form').submit();", :class => "greenButton" %>
+    </li>
+    <li>
+      <%= link_to "Cancel", nil, :class => "redButton goback" %>
+    </li>
+  <% end %>
+  </ul>
+</div>
