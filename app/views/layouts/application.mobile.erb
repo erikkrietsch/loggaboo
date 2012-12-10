@@ -1,14 +1,14 @@
 <!DOCTYPE html>
  <head>
    <title><%= h(yield(:title) || Untitled) %> </title>
-   <%= stylesheet_link_tag "/jqtouch/themes/css/jqtouch.css", "/jqtouch/themes/css/jqtouch.css"%>
-   <%= javascript_include_tag "/jqtouch/lib/zepto.js", "/jqtouch/jqtouch.js", "mobile" %>
+   <%= stylesheet_link_tag "jquery.mobile-1.2.0"%>
+   <%= javascript_include_tag "jquery-1.8.3", "jquery.mobile-1.2.0", "mobile" %>
    <%= yield(:head) %>
   </head>
   <body>
-    <div class="current scrollable">
+    <div data-role="page" class="current scrollable">
       <% if show_title? %>
-      <div class="toolbar">
+      <div data-role="header" class="toolbar">
         <%= link_to "Back", nil, :class => "back" unless current_page? root_path %>
         <%= link_to "Logout", {:controller => :sessions, :action => :destroy}, :class => "button" %>
         <h1><%=h yield(:title) %></h1>
@@ -22,9 +22,11 @@
         <% end %>
       </div>
       <% end %>
+      <div data-role="content">
       
       <%= yield %>
       
+      </div>
     </div>
   </body>
 </html>
