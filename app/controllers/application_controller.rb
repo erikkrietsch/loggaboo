@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => :users, :action => :login
     end
   end
+  helper_method :authenticate
   
   def mobile_device?
     if session[:mobile_param]

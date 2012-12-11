@@ -16,13 +16,16 @@
       </div>
       <% end %>
       <% unless flash.empty? %>
-      <div class="info">
+      <div data-role="popup" id="flash-info-popup" class="info">
         <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, :id => "flash_#{name}" %>
         <% end %>
       </div>
+      <script>
+        $( "#flash-info-popup" ).popup();
+      </script>
       <% end %>
-      <div data-role="content">
+      <div data-role="content primary">
       
       <%= yield %>
       

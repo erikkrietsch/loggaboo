@@ -27,6 +27,12 @@ IMG.entry-icon
 	margin: 0px;
 	padding: 0px;
 }
+IMG.entry-menu-icon
+{
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
 /*[clearfix]*/LI
 {
 	padding: 4px;

@@ -1,17 +1,16 @@
-<div class="toolbar">
-  <h1>Log</h1>
-  <%= link_to 'Add', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button" %>
-</div>
+
+  <%= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "c", "data-role" => "button" %>
 
 
-<div class="scroll">
-  <ul class="rounded">
+
+  <ul data-role="listview" class="rounded" data-dividertheme="c">
+    <li data-role="list-divider">  <h1><%= @log.babies.first.name %></h1> </li>
     <% @log.log_entries.order("log_entries.when DESC").each do |le| %>
-    <li>
-      <div class="entry-icon"><%= entry_icon(le.type) %></div>
-      <div class="entry-recorded-date"><%= entry_recorded_date(le.when) %></div>
-      <div class="entry-details"><%= entry_details(le) %></div>
+    <li data-icon="none">
+      <%= entry_menu_icon(le.type, size="85x85") %>
+      <h3><%= entry_details(le) %></h3>
+      <p><%= entry_recorded_date(le.when) %></p>
     </li>
     <% end %>
   </ul>
-</div>
+

@@ -33,6 +33,10 @@ module LogEntriesHelper
     return image_tag("/entry_icons/#{entry_type}.png", :title => entry_type, :class => "entry-icon")
   end
   
+  def entry_menu_icon(entry_type, size="75x75", *options)
+    return image_tag("/entry_icons/menu_#{entry_type}.png", :title => entry_type, :size => size, :class => "entry-menu-icon")
+  end
+  
   def entry_list_item(log_entry)
     return "#{entry_icon(log_entry.type)} #{entry_recorded_date(DateTime.to_user_local(log_entry.when))} #{entry_details(log_entry)}"
   end

@@ -1,27 +1,27 @@
-<h1>Babies</h1>
-<ul class="rounded">
+<% set_title = "Home" %>
+<ul data-role="listview" data-theme="c" data-dividertheme="c" data-split-theme="a">
+  <li data-role="list-divider"><h1>Babies</h1></li>
   <% @user.babies.each do |b| %>
-  <li class="arrow">
-    <%= link_to b.name, {:controller => :logs, :action => :show, :id => b.log.id} %>
+  <li data-icon="arrow-r" >
+    <%= link_to :controller => :logs, :action => :show, :id => b.log.id do %>
+    <h2><%= b.name %></h2>
+    <p>Born <%= b.birthday.to_s(:long) %></p>
+    <div class="ui-li-count"><%= b.log.log_entries.count %></div>
+    <%= link_to "Edit", {:controller => :babies, :action => :show, :id => b.id}, "data-icon" => "gear" %>
+    <% end %>
   </li>
   <% end %>
-</ul>
-
-<ul class="rounded">
-  <li class="arrow"><%= link_to "New Baby", :controller => :babies, :action => :new %></li>
-</ul>
+  <li data-role="list-divider">&nbsp;</li>
+  <li ><%= link_to "New Baby", :controller => :babies, :action => :new %></li>
 
 <% if @user.has_pending_requests? %>
-<h1>Pending requests</h1>
-<ul class="rounded">
-  <li class="arrow" >
+  <li data-role="list-divider" data-icon="arrow">Pending Requests</li>
+  <li >
     <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list} %>
     <small class="counter"><%= @user.pending_request_count %></small>
   </li>
-</ul>
 <% end %>
 
-<ul class="rounded">
-  <li class="arrow"><%= link_to "Make Access Request", :controller => :user_permission_requests, :action => :new %></li>
-</ul>
+  <li ><%= link_to "Make Access Request", :controller => :user_permission_requests, :action => :new %></li>
 
+</ul>
