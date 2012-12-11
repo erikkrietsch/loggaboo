@@ -1,0 +1,7 @@
+make the back button work
+add a user/account menu in the header
+add a grid to the new entry menu
+convert the remaining entry type partials
+implement authentication enforcement
+add header graphic
+add favicon.ico

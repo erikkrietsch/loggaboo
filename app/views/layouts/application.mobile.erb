@@ -6,8 +6,8 @@
     <%= javascript_include_tag "jquery-1.8.3", "jquery.mobile-1.2.0", "mobile" %>
     <%= yield(:head) %>
   </head>
-  <body >
-    <div data-role="page" data-theme="a">
+ <body data-theme="a">
+    <div data-role="page" class="current scrollable">
       <% if show_title? %>
       <div data-role="header" >
         <%= link_to "Back", nil, "data-icon" => "arrow-l", :class => 
