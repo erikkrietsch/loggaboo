@@ -1,12 +1,14 @@
 <li data-role="fieldcontain">
+  <!-- set the selected option opposite of the most recent breastfeed entry -->
   <%= field_set_tag "Breast", "data-role" => "controlgroup", "data-type" => "horizontal" do %>
-    <%= radio_button :breast_feed_log_entry, :breast, "Left", "name" => "breast_feed_log_entry_breast"  %>
-    <%= label_tag :breast_feed_log_entry_breast_left, "Left" %>
-    <%= radio_button :breast_feed_log_entry, :breast, "Right", "name" => "breast_feed_log_entry_breast" %>
-    <%= label_tag :breast_feed_log_entry_breast_right, "Right" %>
+    <%= radio_button_tag "breast_feed_log_entry[breast]", "Left"  %>
+    <%= label_tag "breast_feed_log_entry_breast_Left", "Left" %>
+    <%= radio_button_tag  "breast_feed_log_entry[breast]", "Right" %>
+    <%= label_tag "breast_feed_log_entry_breast_Right", "Right" %>
   <% end %>
 </li>
 <li>
   <%= label_tag :breast_feed_log_entry, "Duration" %>
-  <%= range_field_tag :breast_feed_log_entry, :duration, :min => 1, :max => 120, :step => 1 %>
+  <%= range_field_tag "breast_feed_log_entry[duration]", 0, :min => 1, :max => 120, :step => 1 %>
 </li>
+

@@ -8,9 +8,9 @@ module LogEntriesHelper
     if datediff < 1
       return distance_of_time_in_words(recorded, t_now, true) + " ago"
     elsif datediff < 7
-      return recorded_datetime.strftime("%a %I:%M %P")
+      return recorded_datetime.strftime("%a %-m/%y %l:%M %P")
     else
-      return recorded_datetime.strftime("%m/%e/%y %I:%M %P")
+      return recorded_datetime.strftime("%-m/%e/%y %l:%M %P")
     end
   end
   

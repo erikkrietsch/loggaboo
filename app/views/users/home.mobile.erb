@@ -1,13 +1,13 @@
-<% set_title = "Home" %>
-<ul data-role="listview" data-theme="c" data-dividertheme="c" data-split-theme="a">
-  <li data-role="list-divider"><h1>Babies</h1></li>
+
+<ul data-role="listview" data-inset="true" data-dividertheme="a">
+  <li data-role="list-divider" ><h2>Babies</h2></li>
   <% @user.babies.each do |b| %>
   <li data-icon="arrow-r" >
     <%= link_to :controller => :logs, :action => :show, :id => b.log.id do %>
     <h2><%= b.name %></h2>
     <p>Born <%= b.birthday.to_s(:long) %></p>
-    <div class="ui-li-count"><%= b.log.log_entries.count %></div>
-    <%= link_to "Edit", {:controller => :babies, :action => :show, :id => b.id}, "data-icon" => "gear" %>
+    <span class="ui-li-count"><%= b.log.log_entries.count %></span>
+    <%= link_to "Edit", {:controller => :babies, :action => :show, :id => b.id}, "data-icon" => "info" %>
     <% end %>
   </li>
   <% end %>
