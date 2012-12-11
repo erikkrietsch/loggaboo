@@ -9,8 +9,8 @@
     <div data-role="page" class="current scrollable">
       <% if show_title? %>
       <div data-role="header" class="toolbar">
-        <%= link_to "Back", nil, :class => "back" unless current_page? root_path %>
-        <%= link_to "Logout", {:controller => :sessions, :action => :destroy}, :class => "button" %>
+        <%= link_to "Back", nil, "data-icon" => "arrow-l", :class => "back" unless current_page? root_path %>
+        <%= link_to "Logout", {:controller => :sessions, :action => :destroy}, "data-role" => "button", "data-icon" => "back", :class => "button" %>
         <h1><%=h yield(:title) %></h1>
         <%= yield(:toolbar) %>
       </div>
