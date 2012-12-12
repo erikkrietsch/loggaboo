@@ -41,4 +41,9 @@ module LogEntriesHelper
     return "#{entry_icon(log_entry.type)} #{entry_recorded_date(DateTime.to_user_local(log_entry.when))} #{entry_details(log_entry)}"
   end
   
+  def should_select_breast(which_breast)
+    #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
+    @log_entry.log.log_entries.where(:loggable_type => "BreastFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.breast != which_breast
+  end
+  
 end
