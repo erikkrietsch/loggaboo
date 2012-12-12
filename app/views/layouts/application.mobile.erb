@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <title><%= h(yield(:title) || Untitled) %> </title>
+    <title><%= h(yield(:title) || "Untitled") %> </title>
     <%= stylesheet_link_tag "jquery.mobile-1.2.0", "poopsy" %>
     <%= javascript_include_tag "jquery-1.8.3", "mobile", "jquery.mobile-1.2.0" %>
     <%= yield(:head) %>
@@ -9,11 +9,13 @@
  <body data-theme="a">
     <div data-role="page" class="current scrollable">
       <% if show_title? %>
-      <div data-role="header" >
-        <%= link_to "Back", nil, "data-icon" => "arrow-l", :class => 
-"back" unless current_page? root_path || home_path %>
-        <%= link_to "Logout", {:controller => :sessions, :action => :destroy}, "data-role" => "button", "data-icon" => "back", :class => "button" %>
-        <h1><%=h yield(:title) %></h1>
+      <div data-role="header">
+        <%= link_to("Back", nil, "data-icon" => "arrow-l", "data-rel" => "back", "data-inset" => "true") unless (current_page?(root_path) || current_page?(home_path)) %>
+
+            <h1>Poopsy</h1>
+            
+        <%= link_to( current_user.display_name, "/user_menu.html", "data-role" => "button", "data-inline" => "true",  "data-rel" => "dialog", "data-transition" => "slidedown",  "data-icon" => "arrow-d", "data-corners" => "false", "data-theme" => "c", :class => "ui-btn-right") unless current_page?(root_path)  %>
+
         <%= yield(:toolbar) %>
       </div>
       <% end %>

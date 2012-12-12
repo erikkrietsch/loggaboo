@@ -21,7 +21,7 @@ class UserPermissionRequestsController < ApplicationController
   end
   
   def list
-    @user = User.find_by_id(session[:user_id])
+    @user = current_user
     @user_requested = UserPermissionRequest.where(:requested_by_id => @user.id).order("updated_at DESC")
     @user_received =  UserPermissionRequest.where(:requested_of_id => @user.id).order("updated_at ASC")
     @user_received_pending = @user_received.where(:status => UserPermissionRequest::STATUS_PENDING)
