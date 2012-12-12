@@ -50,12 +50,13 @@ Poopsy::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   root :to => "users#index"
-
+  
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
   match "/baby" => "babies#show"
   match "/home" => "users#home", :as => :home
   match "/log" => "logs#show"
+  match "/login/:provider" => "users#login", :as => :login
   match "/req/:token" => "user_permission_requests#show"
   # See how all your routes lay out with "rake routes"
 

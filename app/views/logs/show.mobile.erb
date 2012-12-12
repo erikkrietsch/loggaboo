@@ -1,17 +1,15 @@
 
-  <%= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "a", "data-inset" => "true", "data-role" => "button" %>
-
-
+  <%= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "a", "data-inset" => "true", "data-role" => "button", "data-icon" => "star" %>
 
   <ul data-role="listview" data-inset="true" data-dividertheme="c">
-    <li data-role="list-divider" data-form="ui-bar-a">  <h1><%= @log.babies.first.name %></h1> </li>
+    <li data-role="list-divider" data-form="ui-bar-a"><h1><%= @log.babies.first.name %></h1></li>
     <% @log.log_entries.order("log_entries.when DESC").each do |le| %>
     <li data-icon="none" >
-      <a href="#">
+      <%= link_to :controller => :log_entries, :action => :show, :id => le.id do %>
       <%= entry_menu_icon(le.type, size="85x85") %>
       <h3><%= entry_details(le) %></h3>
       <p><%= entry_recorded_date(le.when) %></p>
-      </a>
+      <% end %>
       <%= link_to "Delete Entry", {:controller => :log_entries, :action => :destroy, :id => le.id}, "data-icon" => "delete" %>
     </li>
     <% end %>

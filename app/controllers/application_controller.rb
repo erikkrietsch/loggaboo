@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticationHelper
 
   before_filter :prepare_for_mobile
+  before_filter :ensure_logged_in
   
   protected 
   def authenticate

@@ -1,8 +1,8 @@
 <% title "New Log Entry"%>
-<div class="scroll">
-<ul class="rounded">
+
+<ul data-role="listview" data-inset="true" data-dividertheme="a">
+    <li data-role="list-divider" data-form="ui-bar-a">New Entry</li>
     <% @types.each do |t| %>
     <li class="arrow"><%= link_to( image_tag("/entry_icons/menu_#{t}.png", :size => "75x75") + t.capitalize, {:action => :new, :log_id => @log.id, :type => t}, :class => "menu-new-entry") %></li>
     <% end %>
 </ul>
-</div>

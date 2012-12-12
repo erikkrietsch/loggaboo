@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title><%= h(yield(:title) || Untitled) %> </title>
     <%= stylesheet_link_tag "jquery.mobile-1.2.0", "poopsy" %>
-    <%= javascript_include_tag "jquery-1.8.3", "jquery.mobile-1.2.0", "mobile" %>
+    <%= javascript_include_tag "jquery-1.8.3", "mobile", "jquery.mobile-1.2.0" %>
     <%= yield(:head) %>
   </head>
  <body data-theme="a">
