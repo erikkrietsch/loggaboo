@@ -1,16 +1,14 @@
 <% title "Ask Permission" %>
-<% toolbar "Cancel" %>
-<h1>Send it to who?</h1>
-<div class="scroll">
-  <ul class="rounded">
-  <%= form_tag :action => :create do %>
-    <li><%= text_field_tag :email, nil, "placeholder" => "email" %></li>
-    <li>
-      <%= link_to_function "Send Request", "$(this).closest('form').submit();", :class => "greenButton" %>
-    </li>
-    <li>
-      <%= link_to "Cancel", nil, :class => "redButton goback" %>
-    </li>
-  <% end %>
+    <%= form_tag :action => :create do %>
+  <ul data-role="listview" data-inset="true" data-dividertheme="a">
+    <li data-role="list-divider"><h1>Send it to who?</h1></li>
+      <li><%= email_field_tag :email, nil, "placeholder" => "email" %></li>
+      <li class="ui-body ui-body-b">
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a"><%= link_to "Cancel", home_path, "data-role" => "button", "data-inset" => "true", "data-theme" => "a", "data-rel" =>"back" %></div>
+          <div class="ui-block-b"><%= link_to_function "Send Request", "$(this).closest('form').submit();", "data-role" => "button", "data-inset" => "true", "data-theme" => "c"%></div>
+        </fieldset>
+      </li>
+
   </ul>
-</div>
+    <% end %>

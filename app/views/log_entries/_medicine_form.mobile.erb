@@ -1,0 +1,9 @@
+<li >
+    <%= label :medicine_log_entry, :kind %>
+    <%= text_field :medicine_log_entry, :kind %>
+</li>
+<li>
+  <%= label_tag :medicine_log_entry_amount, "Amount (mL)" %>
+  <%= range_field_tag "medicine_log_entry[amount]", 0, :min => 1, :max => 50, :step => 1 %>
+  <%= hidden_field_tag "medicine_log_entry[amount_uom]", "mL" %>
+</li>

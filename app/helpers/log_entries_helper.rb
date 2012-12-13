@@ -19,7 +19,7 @@ module LogEntriesHelper
     when "breastfeed"
       return "#{log_entry.loggable.breast}, #{log_entry.loggable.duration} min"
     when "bottlefeed"
-      return "#{log_entry.loggable.kind}, #{log_entry.loggable.amount} ML"
+      return "#{log_entry.loggable.kind}, #{log_entry.loggable.amount} oz."
     when "diaper"
       return "#{log_entry.loggable.kind}"
     when "medicine"
@@ -45,5 +45,9 @@ module LogEntriesHelper
     #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
     @log_entry.log.log_entries.where(:loggable_type => "BreastFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.breast != which_breast
   end
-  
+
+  def should_select_bottle_kind(bottle_kind)
+    #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
+    @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.kind == bottle_kind
+  end  
 end

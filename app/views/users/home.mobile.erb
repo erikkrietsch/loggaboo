@@ -11,14 +11,15 @@
     <% end %>
   </li>
   <% end %>
+  
   <li data-role="list-divider">&nbsp;</li>
   <li ><%= link_to "New Baby", :controller => :babies, :action => :new %></li>
 
 <% if @user.has_pending_requests? %>
-  <li data-role="list-divider" data-icon="arrow">Pending Requests</li>
+  <li data-role="list-divider">Pending Requests</li>
   <li >
     <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list} %>
-    <small class="counter"><%= @user.pending_request_count %></small>
+    <span class="ui-li-count"><%= @user.pending_request_count %></span>
   </li>
 <% end %>
 

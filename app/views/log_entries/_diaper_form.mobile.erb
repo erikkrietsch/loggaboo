@@ -1,0 +1,10 @@
+<li data-role="fieldcontain">
+  <%= field_set_tag "Type", "data-role" => "controlgroup", "data-type" => "horizontal" do %>
+    <%= radio_button_tag "diaper_log_entry[kind]", "Pee"  %>
+    <%= label_tag "diaper_log_entry_kind_Pee", "Pee" %>
+    <%= radio_button_tag  "diaper_log_entry[kind]", "Poop" %>
+    <%= label_tag "diaper_log_entry_kind_Poop", "Poop" %>
+    <%= radio_button_tag  "diaper_log_entry[kind]", "Both" %>
+    <%= label_tag "diaper_log_entry_kind_Both", "Both" %>
+  <% end %>
+</li>

@@ -3,10 +3,8 @@
 
 <ul data-role="listview" data-inset="true">
   <li>
-    <div data-role="fieldcontain">
-    	         <label for="log_entry[when]">When:</label>
-    	         <input type="datetime" name="log_entry[when]" id="log_entry[when]" value="<%= DateTime.now.strftime("%_m/%e/%Y %l:%M %P") %>" />
-    			</div>
+    <label for="log_entry_when">When</label>
+    <input type="datetime" name="log_entry[when]" id="log_entry_when" value="<%= DateTime.now.strftime("%_m/%e/%Y %l:%M %P") %>" />
   </li>
 
 <%= render(:partial => "#{@log_entry.loggable_type}_form", :locals => {:f => f}) unless @log_entry.loggable_type == "other" %>

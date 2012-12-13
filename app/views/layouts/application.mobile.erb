@@ -14,19 +14,19 @@
 
             <h1>Poopsy</h1>
             
-        <%= link_to( current_user.display_name, "/user_menu.html", "data-role" => "button", "data-inline" => "true",  "data-rel" => "dialog", "data-transition" => "slidedown",  "data-icon" => "arrow-d", "data-corners" => "false", "data-theme" => "c", :class => "ui-btn-right") unless current_page?(root_path)  %>
+        <%= link_to( current_user.display_name, "/user_menu.html", "data-role" => "button", "data-inline" => "true",  "data-rel" => "dialog", "data-transition" => "slidedown",  "data-icon" => "arrow-d", "data-corners" => "true", "data-theme" => "a", :class => "ui-btn-right") unless current_page?(root_path)  %>
 
         <%= yield(:toolbar) %>
       </div>
       <% end %>
       <% unless flash.empty? %>
-      <div data-role="popup" id="flash-info-popup">
+      <div data-role="popup" id="flash-info-popup" class="ui-content">
         <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, :id => "flash_#{name}" %>
         <% end %>
       </div>
       <script>
-        $( 'flash-info-popup' ).popup();
+        $( '#flash-info-popup' ).popup('open');
       </script>
       <% end %>
       <div data-role="content" class="content-primary">
@@ -34,6 +34,7 @@
       <%= yield %>
       
       </div>
+      <!--div data-role="footer">&copy; Poopsy Co.</div -->
     </div>
   </body>
 </html>
