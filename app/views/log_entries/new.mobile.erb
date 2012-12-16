@@ -12,7 +12,7 @@
     <%= f.label :notes %>
     <%= f.text_area :notes, :size => "40x10" %>
   </li>
-  <li><%= button_tag "Create entry" %></li>
+  <li><%= f.submit "Create entry", "data-theme" => "c" %></li>
 </ul>
 <%= hidden_field_tag :log_id, @log_entry.log.id %>
 <%= hidden_field_tag :creator_id, @log_entry.creator.id %>

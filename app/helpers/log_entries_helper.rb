@@ -43,11 +43,11 @@ module LogEntriesHelper
   
   def should_select_breast(which_breast)
     #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
-    @log_entry.log.log_entries.where(:loggable_type => "BreastFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.breast != which_breast
+    @log_entry.log.log_entries.where(:loggable_type => "BreastFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.breast != which_breast if @log_entry.log.log_entries.where(:loggable_type => "BreastFeedLogEntry").any?
   end
 
   def should_select_bottle_kind(bottle_kind)
     #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
-    @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.kind == bottle_kind
+    @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.kind == bottle_kind if @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").any?
   end  
 end

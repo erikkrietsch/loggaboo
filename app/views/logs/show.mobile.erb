@@ -1,5 +1,5 @@
 
-  <%= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "a", "data-inset" => "true", "data-role" => "button", "data-icon" => "plus" %>
+  <%= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "c", "data-inset" => "true", "data-role" => "button", "data-icon" => "plus" %>
 
   <ul data-role="listview" data-inset="true" data-dividertheme="c">
     <li data-role="list-divider" data-form="ui-bar-a"><h1><%= @log.babies.first.name %></h1></li>
@@ -12,6 +12,9 @@
       <% end %>
       <%= link_to "Delete Entry", {:controller => :log_entries, :action => :destroy, :id => le.id}, "data-icon" => "delete" %>
     </li>
+    <% end %>
+    <% if @log.log_entries.none? %>
+      <li data-icon="alert" data-iconpos="left">No entries yet! Add one! Go on, do it!</li>
     <% end %>
   </ul>
 

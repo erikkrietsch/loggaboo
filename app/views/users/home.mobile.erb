@@ -1,4 +1,11 @@
 
+<% if @user.has_pending_requests? %>
+    <%= link_to({:controller => :user_permission_requests, :action => :list}, {"data-iconpos" => "left", "data-icon" => "alert", "data-role" => "button", "data-theme" => "c"}) do %>
+    You have Baby Access Requests!
+    (<span class="count"><%= @user.pending_request_count %></span>)
+    <% end %>
+<% end %>
+
 <ul data-role="listview" data-inset="true" data-dividertheme="a">
   <li data-role="list-divider" ><h2>Babies</h2></li>
   <% @user.babies.each do |b| %>
@@ -14,15 +21,6 @@
   
   <li data-role="list-divider">&nbsp;</li>
   <li ><%= link_to "New Baby", :controller => :babies, :action => :new %></li>
-
-<% if @user.has_pending_requests? %>
-  <li data-role="list-divider">Pending Requests</li>
-  <li >
-    <%= link_to "Baby Access Requests", {:controller => :user_permission_requests, :action => :list} %>
-    <span class="ui-li-count"><%= @user.pending_request_count %></span>
-  </li>
-<% end %>
-
   <li ><%= link_to "Make Access Request", :controller => :user_permission_requests, :action => :new %></li>
 
 </ul>
