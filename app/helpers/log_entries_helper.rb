@@ -26,7 +26,10 @@ module LogEntriesHelper
       return "#{log_entry.loggable.kind}, #{log_entry.loggable.amount} #{log_entry.loggable.amount_uom}"
     when "sleep"
       return "#{log_entry.loggable.duration} min"
+    when "other"
+      return truncate(log_entry.notes, :length => 40, :omission => "(con't)")
     end
+    
   end
   
   def entry_icon(entry_type)
