@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208003243) do
+ActiveRecord::Schema.define(:version => 20121216203017) do
 
   create_table "babies", :force => true do |t|
     t.string   "name",       :null => false
@@ -89,10 +89,24 @@ ActiveRecord::Schema.define(:version => 20121208003243) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "pump_log_entries", :force => true do |t|
+    t.decimal  "duration",   :precision => 10, :scale => 0, :default => 0
+    t.integer  "amount",                                    :default => 0
+    t.string   "amount_uom",                                :default => "mL"
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
+  end
+
   create_table "sleep_log_entries", :force => true do |t|
     t.decimal  "duration",   :precision => 10, :scale => 0
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "tummy_time_log_entries", :force => true do |t|
+    t.decimal  "duration",   :precision => 10, :scale => 0, :default => 0
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
   end
 
   create_table "user_configs", :force => true do |t|

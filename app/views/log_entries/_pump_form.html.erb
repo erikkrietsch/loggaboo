@@ -1,0 +1,15 @@
+<tr>
+  <th>Type</th>
+  <td>
+    <%= radio_button :pump_log_entry, :amount_uom, "Oz." %> Oz. <br/>
+    <%= radio_button :pump_log_entry, :amount_uom, "mL" %> mL <br/>
+  </td>
+</tr>
+<tr>
+  <th>Amount</th>
+  <td><%= text_field :pump_log_entry, :amount, :class => "slider"%> </td>
+</tr>
+<tr>
+  <th>Duration</th>
+  <td><%= text_field :pump_log_entry, :duration, :class => "slider"%> </td>
+</tr>

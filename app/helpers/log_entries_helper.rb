@@ -26,6 +26,10 @@ module LogEntriesHelper
       return "#{log_entry.loggable.kind}, #{log_entry.loggable.amount} #{log_entry.loggable.amount_uom}"
     when "sleep"
       return "#{log_entry.loggable.duration} min"
+    when "tummytime"
+      return "#{log_entry.loggable.duration} min"
+    when "pump"
+      return "#{log_entry.loggable.amount} #{log_entry.loggable.amount_uom}, #{log_entry.loggable.duration} min"
     when "other"
       return truncate(log_entry.notes, :length => 40, :omission => "(con't)")
     end
@@ -53,4 +57,8 @@ module LogEntriesHelper
     #checks to see if the last entry matches the breast we're asking about.  if not, return true (alternate based on last entry)
     @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").order("`log_entries`.`when` DESC").first.loggable.kind == bottle_kind if @log_entry.log.log_entries.where(:loggable_type => "BottleFeedLogEntry").any?
   end  
+
+  def should_select_pump_uom(uom)
+    @log_entry.log.log_entries.where(:loggable_type => "PumpLogEntry").order("`log_entries`.`when` DESC").first.loggable.amount_uom == uom if @log_entry.log.log_entries.where(:loggable_type => "PumpLogEntry").any?
+  end
 end

@@ -20,14 +20,20 @@
       </div>
       <% end %>
       <% unless flash.empty? %>
-      <div data-role="popup" id="flash-info-popup" class="ui-content">
+      <div data-rel="popup" id="flash-info-popup" class="ui-content" data-overlaytheme="a">
         <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, :id => "flash_#{name}" %>
         <% end %>
       </div>
-      <script>
-        $( '#flash-info-popup' ).popup('open');
-      </script>
+  <%
+  #<script>
+  #   $('#flash-info-popup').popup('open');
+  #   setTimeout(function(){
+  #       $('#flash-info-popup').popup('close');
+  #   }, 1000);
+  # </script>
+  %>    
+  
       <% end %>
       <div data-role="content" class="content-primary">
       

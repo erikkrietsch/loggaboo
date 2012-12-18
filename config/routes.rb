@@ -51,6 +51,8 @@ Poopsy::Application.routes.draw do
   # root :to => 'welcome#index'
   root :to => "users#index"
   
+  resources :user_permission_requests
+  
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
   match "/baby" => "babies#show"
@@ -58,6 +60,8 @@ Poopsy::Application.routes.draw do
   match "/log" => "logs#show"
   match "/login/:provider" => "users#login", :as => :login
   match "/req/:token" => "user_permission_requests#show"
+  
+  
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

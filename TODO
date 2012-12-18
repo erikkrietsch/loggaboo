@@ -1,4 +1,5 @@
-convert the remaining entry type partials
+add new "pumped" log entry
+add new "tummy time" log entry
 add 5/15/30/45/60 minutes ago buttons to "when" entry
 "duration" label is bolded on breastfeed entry partial?
 add header graphic
@@ -7,7 +8,7 @@ flash notice popup
 confirm logout
 confirm entry delete
 add baby & user images
-clean up UPR create form
+
 ads in footer
 guess limits for duration / amount sliders
 experiment with javascript timers

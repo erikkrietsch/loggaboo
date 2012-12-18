@@ -1,0 +1,16 @@
+<li data-role="fieldcontain">
+  <%= field_set_tag "Unit of Measure", "data-role" => "controlgroup", "data-type" => "horizontal" do %>
+    <%= radio_button_tag "pump_log_entry[amount_uom]", "Oz", should_select_pump_uom("Oz")  %>
+    <%= label_tag "pump_log_entry_amount_uom_Oz", "Oz" %>
+    <%= radio_button_tag  "pump_log_entry[amount_uom]", "mL", should_select_pump_uom("mL")  %>
+    <%= label_tag "pump_log_entry_amount_uom_mL", "mL" %>
+  <% end %>
+</li>
+<li>
+  <%= label_tag :pump_log_entry_amount, "Amount" %>
+  <%= range_field_tag "pump_log_entry[amount]", 0, :min => 0, :max => 400, :step => 0.5 %>
+</li>
+<li>
+  <%= label_tag :pump_log_entry_duration, "Duration" %>
+  <%= range_field_tag "pump_log_entry[duration]", 0, :min => 1, :max => 120, :step => 1 %>
+</li>

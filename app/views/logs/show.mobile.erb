@@ -10,7 +10,7 @@
       <h3><%= entry_details(le) %></h3>
       <p><%= entry_recorded_date(le.when) %></p>
       <% end %>
-      <%= link_to "Delete Entry", {:controller => :log_entries, :action => :destroy, :id => le.id}, "data-icon" => "delete" %>
+      <%= link_to "Delete Entry", {:controller => :dialogs, :action => :confirm_entry_delete, :id => le.id}, "data-icon" => "delete", "data-rel" => "dialog" %>
     </li>
     <% end %>
     <% if @log.log_entries.none? %>

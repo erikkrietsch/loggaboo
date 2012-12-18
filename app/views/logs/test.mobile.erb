@@ -1,0 +1,21 @@
+<div data-role="popup" id="flash-info-popup2" class="ui-content">
+  ADSFASDF
+</div>
+
+<script>
+function showFlash() {
+  $( '#flash-info-popup' ).popup('open');
+  sleep(10000);
+  $( '#flash-info-popup' ).popup('close');
+}
+function showFlash2() {
+  $('#flash-info-popup2').popup('open', {transition: 'slidedown'});
+  setTimeout(function(){
+      $('#flash-info-popup2').popup('close');
+  }, 1000);
+}
+</script>
+
+
+<a href="#" onclick="showFlash();">Flash</a><br/>
+<a href="#" onclick="showFlash2();">ADSF</a>

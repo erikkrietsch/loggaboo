@@ -3,6 +3,11 @@ class UsersController < ApplicationController
 
   def home
     @user = User.find_by_auth_token(session[:uid])
+    begin
+      @user.last_login = DateTime.now
+      @user.save
+    rescue 
+    end
     @babies = @user.babies
   end
   

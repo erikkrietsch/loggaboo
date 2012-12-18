@@ -23,8 +23,8 @@ class UserPermissionRequestsController < ApplicationController
   def list
     @user = current_user
     @user_requested = UserPermissionRequest.where(:requested_by_id => @user.id).order("updated_at DESC")
-    @user_received =  UserPermissionRequest.where(:requested_of_id => @user.id).order("updated_at ASC")
-    @user_received_pending = @user_received.where(:status => UserPermissionRequest::STATUS_PENDING)
+    @user_received =  UserPermissionRequest.where(:requested_of_id => @user.id, :status => [UserPermissionRequest::STATUS_APPROVED, UserPermissionRequest::STATUS_DECLINED]).order("updated_at ASC")
+    @user_received_pending = UserPermissionRequest.where(:requested_of_id => @user.id, :status => UserPermissionRequest::STATUS_PENDING).order("updated_at DESC")
   end
   
   def show

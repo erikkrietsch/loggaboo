@@ -1,5 +1,5 @@
 class LogEntry < ActiveRecord::Base
-  attr_accessible :notes, :when, :creator_id, :log_id, :loggable_type, :loggable_id
+  attr_accessible :notes, :creator_id, :log_id, :loggable_type, :loggable_id, :when
   belongs_to :log
   belongs_to :loggable, :polymorphic => true
   belongs_to :creator, :class_name => "User", :foreign_key => :creator_id
@@ -16,6 +16,10 @@ class LogEntry < ActiveRecord::Base
       result = "medicine"
     when "DiaperLogEntry"
       result = "diaper"
+    when "PumpLogEntry"
+      result = "pump"
+    when "TummyTimeLogEntry"
+      result = "tummytime"
     else
       result = "other"
     end
