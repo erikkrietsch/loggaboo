@@ -1,0 +1,18 @@
+%h2= @baby.name
+%td= @baby.name 
+%td= @baby.birthday.to_s(:long)
+%td= @baby.photo_url ? image_tag(@baby.photo_url) : "n/a"
+%td= link_to "Log", {:controller=> :logs, :action => :show, :id => @baby.log.id}, :class => "action show"
+%td= "#{ @baby.log.creator.display_name} #{ @baby.log.creator.email }"
+
+%h3 Users with what kind of access
+%table{:summary => "users with what kind of access"}
+- if @baby.users.one? 
+  Just you! :)
+- else
+  - @baby.users.each do |u|
+    %tr{:class=> cycle("odd", "even") }
+      %td= u.first_name
+      %td= u.last_name
+      %td= u.email
+      %td= link_to_if(@baby.owner == @user, "revoke", {:controller => :user_permission_requests, :action => :list})

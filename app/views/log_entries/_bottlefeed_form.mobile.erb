@@ -1,13 +1,13 @@
 <li data-role="fieldcontain">
   <!-- set the selected option opposite of the most recent bottlefeed entry -->
   <%= field_set_tag "Type", "data-role" => "controlgroup", "data-type" => "horizontal" do %>
-    <%= radio_button_tag "bottle_feed_log_entry[kind]", "Milk", should_select_bottle_kind("Milk")  %>
+    <%= radio_button_tag "bottle_feed_log_entry[kind]", "Milk", @log_entry.loggable.kind == "Milk" || should_select_bottle_kind("Milk")  %>
     <%= label_tag "bottle_feed_log_entry_kind_Milk", "Milk" %>
-    <%= radio_button_tag  "bottle_feed_log_entry[kind]", "Formula", should_select_bottle_kind("Formula")  %>
+    <%= radio_button_tag  "bottle_feed_log_entry[kind]", "Formula", @log_entry.loggable.kind == "Formula" || should_select_bottle_kind("Formula")  %>
     <%= label_tag "bottle_feed_log_entry_kind_Formula", "Formula" %>
   <% end %>
 </li>
 <li>
   <%= label_tag :bottle_feed_log_entry_amount, "Amount (oz.)" %>
-  <%= range_field_tag "bottle_feed_log_entry[amount]", 0, :min => 1, :max => 120, :step => 1 %>
+  <%= range_field_tag "bottle_feed_log_entry[amount]", @log_entry.loggable.amount || 0, :min => 1, :max => 120, :step => 1 %>
 </li>

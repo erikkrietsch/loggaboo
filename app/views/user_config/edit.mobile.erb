@@ -1,23 +1,19 @@
 
 <%= form_for @user.config, :url => {:action => :update} do |f| %>
-<ul data-role="lisview" data-inset="true" >
-  <li class="ui-body" >
+
+
   <% if not params[:more_zones] %>
     <%= link_to "Need more 'zones?", :action => :edit, :more_zones => true %>
     <%= f.select :time_zone, ActiveSupport::TimeZone.us_zones.map(&:name) %>
   <% else %>
     <%= f.select :time_zone, ActiveSupport::TimeZone.all.map(&:name) %>
   <% end %>
-  </li>
-  <li class="ui-body ">
-    <fieldset class="ui-grid-a">
-      <div class="ui-block-a">
-  <%= link_to "Cancel", nil, "data-role" => "button", "data-rel" => "back", "data-icon" => "delete" %>  
-      </div>
-      <div class="ui-block-b">
+  <fieldset class="ui-grid-a">
+    <div class="ui-block-a">
+  <%= link_to "Cancel", home_url, "data-role" => "button", "data-icon" => "delete" %>  
+    </div>
+    <div class="ui-block-b">
   <%= submit_tag "Save", "data-theme" => "c", "data-icon" => "check" %>
-      </div>
-    </fieldset>
-  </li>
-</ul>
+    </div>
+  </fieldset>
 <% end %>

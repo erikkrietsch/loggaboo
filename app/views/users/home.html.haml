@@ -1,0 +1,22 @@
+%h2= "Why hello there, #{ link_to @user.first_name, {:controller => :user_config, :action => :edit} }!".html_safe
+.logout-link= "Not #{@user.first_name}? Oops! (#{link_to 'sign_out', {:controller => :sessions, :action => :destroy}, :class => 'logout-link'})".html_safe
+%br
+.create-request= link_to "Request user permission", {:controller=>:user_permission_reqeusts, :action => :new}, :class => "create-request"
+- if @user.has_pending_requests?
+	%h3 Requests
+	You have pending requests! That's exciting! 
+	= link_to "Check 'em out!", {:controller => :user_permission_reqeusts, :action => :list}, :class => "pending-requests"
+%h3 Babbies
+= link_to "New baby", {:controller => :babies, :action => :new}, :class => "action new" 
+%table{:summary => "list of available babbies"}
+	%tr.header
+		%th
+		%th Name
+		%th Birthday
+		%th Log
+	- @user.babies.each do |b|
+		%tr{:class => cycle("odd", "even")}
+			%td= link_to "X", :controller => :babies, :action => :destroy, :id => b.id
+			%td= link_to b.name, :controller => :babies, :action => :show, :id => b.id
+			%td= b.birthday.to_s(:long)
+			%td= link_to "Log", :controller => :logs, :action => :show, :id => b.log.id

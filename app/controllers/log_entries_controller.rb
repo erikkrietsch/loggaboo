@@ -1,7 +1,18 @@
 class LogEntriesController < ApplicationController
   include UsersHelper
+  
+  def new_menu
+    @log = Log.find_by_id(params[:log_id])
+    @types = %w[breastfeed bottlefeed sleep diaper medicine pump tummytime other]
+  end
+  
   def new
-    @log_entry = LogEntry.new(:log_id => params[:log_id], :creator_id => session[:user_id], :loggable_type => params[:type], :when => Time.now.to_s(:short))
+    now = nil
+    @post_action = :create
+    Time.use_zone(current_user.config.time_zone) do
+      now = Time.parse(Time.now.to_s(:long))
+    end
+    @log_entry = LogEntry.new(:log_id => params[:log_id], :creator_id => session[:user_id], :loggable_type => params[:type], :when => now)
     case params[:type]
     when "breastfeed"
       @loggable = BreastFeedLogEntry.new    
@@ -16,12 +27,7 @@ class LogEntriesController < ApplicationController
     else
       @loggable = OtherLogEntry.new
     end 
-    
-  end
-  
-  def new_menu
-    @log = Log.find_by_id(params[:log_id])
-    @types = %w[breastfeed bottlefeed sleep diaper medicine pump tummytime other]
+    @log_entry.loggable = @loggable
   end
   
   def create
@@ -54,6 +60,28 @@ class LogEntriesController < ApplicationController
     @log_entry.save
     redirect_to :controller => :logs, :action => :show, :id => @log_entry.log.id
   end
+  
+  def edit
+    @post_action = :update
+    @log_entry = LogEntry.find_by_id(params[:id]) if params[:id]
+    render :new
+  end
+  
+  def update
+    @log_entry = LogEntry.find_by_id(params[:log_entry][:id]) if params[:log_entry][:id]
+    @log_entry.update_attributes(params[:log_entry])
+    unless @log_entry.type == "other"
+      @log_entry.loggable.update_attributes(params[@log_entry.loggable.class.name.underscore.to_sym])
+    end
+    if @log_entry.save 
+      flash[:notice] = "Changes saved."
+    else
+      flash[:notice] = "Changes not saved."
+    end
+    redirect_to :controller => :logs, :action => :show, :id => @log_entry.log.id    
+  end
+  
+  
   
   def destroy
     @log_entry = LogEntry.find_by_id(params[:id])
