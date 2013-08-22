@@ -1,4 +1,4 @@
-%h2= "Why hello there, #{ link_to @user.first_name, {:controller => :user_config, :action => :edit} }!".html_safe
+%h1= "Why hello there, #{ link_to @user.first_name, {:controller => :user_config, :action => :edit} }!".html_safe
 .logout-link= "Not #{@user.first_name}? Oops! (#{link_to 'sign_out', {:controller => :sessions, :action => :destroy}, :class => 'logout-link'})".html_safe
 %br
 .create-request= link_to "Request user permission", {:controller=>:user_permission_reqeusts, :action => :new}, :class => "create-request"
@@ -6,7 +6,7 @@
 	%h3 Requests
 	You have pending requests! That's exciting! 
 	= link_to "Check 'em out!", {:controller => :user_permission_reqeusts, :action => :list}, :class => "pending-requests"
-%h3 Babbies
+%h2 Babbies
 = link_to "New baby", {:controller => :babies, :action => :new}, :class => "action new" 
 %table{:summary => "list of available babbies"}
 	%tr.header

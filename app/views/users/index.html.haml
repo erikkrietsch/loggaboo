@@ -1,0 +1,12 @@
+%h2 Users#index
+- unless flash[:notice].blank?
+  .notice
+    = flash[:notice]
+= link_to "Login with Google", "/auth/google_oauth2/", :rel => "external"
+%br
+= link_to "Logout", "/sessions/destroy/"
+%br
+- unless session[:user_id].blank?
+  .user_id
+  User ID: 
+  = session[:user_id]

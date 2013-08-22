@@ -1,0 +1,20 @@
+-if @user.has_pending_requests?
+  = link_to({:controller => :user_permission_requests, :action => :list}, {"data-iconpos" => "left", "data-icon" => "alert", "data-role" => "button", "data-theme" => "c"}) do
+    You have Baby Access Requests! (
+    %span.count
+      = @user.pending_request_count
+    )
+
+%ul{:data => {:role => "listview", :inset => "true", :dividertheme => "a"} }
+  %li{:data => {:role => "list-divider"} }
+    %h2 Babbies
+    - @user.babies.each do |b|
+      %li{:data => { :icon => "arrow-r"} }
+        = link_to :controller => :logs, :action => :show, :id => b.log.id do
+          %h2= b.name
+          %p= "Born #{b.birthday.to_s(:long)}"
+          %span.ui-li-count= b.log.log_entries.count
+          = link_to "Edit", {:controller => :babies, :action => :show, :id => b.id}, "data-icon" => "info" 
+  %li{:data => {:role => "list-divider"} }
+  %li= link_to "Form Babby", :controller => :babies, :action => :new
+  %li= link_to "Ask Permission", :controller => :user_permission_requests, :action => :new
