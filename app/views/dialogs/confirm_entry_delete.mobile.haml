@@ -1,0 +1,6 @@
+- @dialog_header = "Are you sure?"
+- @dialog_details = "You can't undo this. Do you want to delete this entry?"
+/ <!--a data-role="button" data-inset="true" data-icon="check" href="#" >Yep.</a>
+
+= link_to "Yep.", {:controller => :log_entries, :action => :destroy, :id => params[:id], :confirmed => true}, {"data-role" => "button", "data-inset" => "true", "data-icon" => "check"}
+= link_to "Oops! No way!", nil, {"data-role" => "button", "data-inset" => "true", "data-icon" => "delete", "data-rel" => "back", "data-theme" => "c"}

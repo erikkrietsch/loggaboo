@@ -1,0 +1,11 @@
+%div{:data => {:role => "header"} }
+	= link_to 'Add', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, "data-icon" => "plus", "class" => "ui-btn-right"
+	%h1 Log
+
+%div{:data => {:role => "content"}}
+	%ul{:data => {:role => "listview"}}
+		- @log.log_entries.order("log_entries.when DESC").each do |le|
+			%li
+				#entry-icon= entry_icon(le.type)
+				#entry-recorded-date= entry_recorded_date(le.when)
+				#entry-details= entry_details(le)

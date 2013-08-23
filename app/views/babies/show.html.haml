@@ -1,0 +1,26 @@
+= link_to "<< Go back", :controller => :users, :action => :home
+
+%h2= @baby.name
+= link_to "Delete", :action => :destroy, :id => @baby.id
+%p
+	Birthday:
+	= @baby.birthday.to_s(:long)
+	%br
+	Photo:
+	= @baby.photo_url ? image_tag(@baby.photo_url) : "Add Photo"
+%h2 Logs
+= link_to "Log", {:controller => :logs, :action => :show, :id => @baby.log.id}, :class => "action show"
+= @baby.log.creator.display_name 
+= @baby.log.creator.email
+
+%h2 Users with access
+%ul
+	- if @baby.users.count == 1
+		Just you! :)
+	- else
+		- @baby.users.each do |u|
+			%p
+				= u.first_name
+				= u.last_name
+				= u.email
+			%p= link_to_if(@baby.owner == @user, "revoke", {:controller => :user_permission_requests, :action => :list})
