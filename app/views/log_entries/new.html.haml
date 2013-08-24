@@ -1,0 +1,18 @@
+= form_for :log_entry, :url => {:action => :create} do |f|
+	%table{:summary => "log entry form"}
+		%tr
+			%th Log ID
+			%td= @log_entry.log.id
+			%th Creator
+			%td= @log_entry.creator.first_name
+		%tr
+			%th When
+			%td= f.text_field :when
+		= render :partial => "#{@log_entry.type}_form", :locals => {:f => f} unless @log_entry.type == "other"
+		%tr
+			%th Notes
+			%td= f.text_area :notes, :size => "40x10"
+	= hidden_field_tag :log_id, @log_entry.log.id
+	= hidden_field_tag :creator_id, @log_entry.creator.id
+	= hidden_field_tag :type, params[:type]
+	= submit_tag "Create entry"

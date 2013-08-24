@@ -1,4 +1,4 @@
-= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => 1}, :class => "button", "data-theme" => "c", "data-inset" => "true", "data-role" => "button", "data-icon" => "plus"
+= link_to 'Add Log Entry', {:controller => :log_entries, :action => :new_menu, :log_id => @log.id}, :class => "button", "data-theme" => "c", "data-inset" => "true", "data-role" => "button", "data-icon" => "plus"
 %ul{ :data => {:role => "listview", :inset => "true", :dividertheme => "c"}}
 	%li{:data => {:role=>"list-divider", :form=>"ui-bar-a"}}
 		%h1= @log.babies.first.name

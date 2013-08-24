@@ -1,0 +1,15 @@
+%div{:data => {:role => "header"}}
+	%h1 New Baby
+
+%div{:data => {:role => "form"}}
+	= form_for :baby, :url => {:action => :create} do |f|
+		%h2 Name
+		= f.text_field :name
+		%br
+		%h2 Birthday
+		= f.date_select :birthday
+		%br
+		%h2 Photo
+		%div N/A
+		%br
+		= submit_tag "Create Babby", :class => "submit-buttons"

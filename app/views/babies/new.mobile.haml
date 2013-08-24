@@ -1,0 +1,15 @@
+= form_for :baby, :url => {:action => :create} do |f|
+	%ul{:data => {:role => "listview", :inset => "true", :dividertheme => "a"}}
+		%li{:data => {:role => "list-divider" }}
+			%h2 New Baby? Oh joy! As in, bundle of. :)
+		%li
+			= f.label :name 
+			= f.text_field :name 
+		%li
+			%div{:data=>{:role=>"field-contain"}}
+				= field_set_tag "Birthday", "data-role" => "controlgroup", "data-type" => "horizontal" do
+					= f.date_select :birthday, "data-inset" => "true"
+		%li
+			= label_tag "photo"
+			= file_field_tag "photo", :accept => "image/png,image/gif,image/jpeg"
+		%li= f.submit "Create Baby", "data-theme" => "c"

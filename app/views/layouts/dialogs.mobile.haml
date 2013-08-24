@@ -1,0 +1,5 @@
+%div{:data => {:role => "page"}, :class => "dialog-actionsheet" }
+	%div{:data => {:role => "content", :theme => @dialog_data_theme || "a"}}
+		%h2= @dialog_header
+		%p= @dialog_details if @dialog_details
+	= yield
