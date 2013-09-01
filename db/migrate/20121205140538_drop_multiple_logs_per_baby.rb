@@ -6,10 +6,10 @@ class DropMultipleLogsPerBaby < ActiveRecord::Migration
   end
   
   def down
-    create_table :babies_users, :id => false do |t|
-      t.references :user
+    create_table :babies_logs, :id => false do |t|
       t.references :baby
+      t.references :log
     end
-    add_index :babies_users, ["user_id", "baby_id"]
+    add_index :babies_logs, ["baby_id", "log_id"]
   end
 end

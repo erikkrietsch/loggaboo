@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(:version => 20121216203017) do
     t.integer  "creator_id"
     t.integer  "loggable_id"
     t.string   "loggable_type"
-    t.datetime "when"
+    t.datetime "when",          :default => '2013-08-26 00:00:00'
     t.text     "notes"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
   end
 
   add_index "log_entries", ["creator_id"], :name => "index_log_entries_on_creator_id"

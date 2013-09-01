@@ -11,4 +11,4 @@
 			= link_to "Delete Entry", {:controller => :dialogs, :action => :confirm_entry_delete, :id => le.id}, "data-icon" => "delete", "data-rel" => "dialog"
 	- if @log.log_entries.none? 
 		%li{:data => {:icon=>"alert", :iconpos=>"left"}}
-			What's this? No entries? Log away, brave caretaker!
+			No entries? Log away, brave caretaker!

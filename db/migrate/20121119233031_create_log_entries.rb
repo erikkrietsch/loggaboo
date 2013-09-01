@@ -4,7 +4,7 @@ class CreateLogEntries < ActiveRecord::Migration
       t.references :log
       t.references :creator, :class_name => "User"
       t.references :loggable, :polymorphic => true
-      t.datetime :when
+      t.datetime :when, :default => Date.today
       t.text :notes
       t.timestamps
     end
