@@ -1,0 +1,21 @@
+!!! 5
+%head
+  %meta{:name => "viewport", :content => "width=device-width,initial-scale=1"}
+  %title= h(yield(:title)) || "Untitled"
+  = stylesheet_link_tag "jquery.mobile-1.2.0", "poopsy"
+  = javascript_include_tag "jquery-1.8.3", "mobile", "jquery.mobile-1.2.0"
+  = yield(:head)
+%body
+  %div{:data => {:role => "page", :theme => "a"}}
+    - if show_title?
+      %div{:data => {:role => "header"}}
+        = link_to "Back", nil, "data-icon" => "arrow-l", "data-rel" => "back", "data-inset" => "true" unless (current_page?(root_path) || current_page?(home_path))
+        %h1 Poopsy
+        = link_to( current_user.display_name, "/user_menu.html", "data-role" => "button", "data-inline" => "true",  "data-rel" => "dialog", "data-transition" => "slidedown",  "data-icon" => "arrow-d", "data-corners" => "true", "data-theme" => "a", :class => "ui-btn-right") unless current_page?(root_path)
+        = yield(:toolbar)
+    - unless flash.empty?
+      #flash-info-popup.ui-content{:data => {:rel => "popup", :overlaytheme => "a"}}
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+    #content-primary{:data => {:role => "content"}}
+      = yield

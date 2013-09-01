@@ -1,0 +1,9 @@
+%li{:data => {:role => "fieldcontain"}}
+  = field_set_tag "Breast", "data-role" => "controlgroup", "data-type" => "horizontal" do
+    = radio_button_tag "breast_feed_log_entry[breast]", "Left", should_select_breast("Left")
+    = label_tag "breast_feed_log_entry_breast_Left", "Left"
+    = radio_button_tag "breast_feed_log_entry[breast]", "Right", should_select_breast("Right")
+    = label_tag "breast_feed_log_entry_breast_Right", "Right"
+%li
+  = label_tag :breast_feed_log_entry_duration, "Duration"
+  = range_field_tag "breast_feed_log_entry[duration]", 0, :min => 1, :max => 120, :step => 1

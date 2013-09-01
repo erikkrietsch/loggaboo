@@ -1,0 +1,19 @@
+= form_for(@log_entry, :url => {:action => @post_action}) do |f|
+  %ul{:data => {:role => "listview", :inset => "true"}}
+    %li
+      %label{:for => "log_entry_when"} When
+      %input#log_entry_when{:type => "datetime", :name => "log_entry[when]", :value => @log_entry.when.strftime("%-m/%-d/%Y %l:%M %p") }
+    = render(:partial => "#{@log_entry.type}_form", :locals => {:f => f}) unless @log_entry.type == "other"
+    %li
+      = f.label :notes
+      = f.text_area :notes, :size => "40x10"
+    %li
+      %fieldset{:class => "ui-grid-a"}
+        %div{:class => "ui-block-a"}
+          = link_to "Cancel", {:controller => :logs, :action => :show, :id => @log_entry.log.id}, "data-role" => "button"
+        %div{:class => "ui-block-b"}
+          = f.submit @log_entry.new_record? ? "Create" : "Save", "data-theme" => "c"
+  = f.hidden_field :id
+  = hidden_field_tag :log_id, @log_entry.log.id
+  = hidden_field_tag :creator_id, @log_entry.creator.id
+  = hidden_field_tag :type, params[:type]
